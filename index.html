@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kieran Kim-Murphy</title>
+
+    <!-- Styles -->
     <style>
         /* ========================
            Base Styling
@@ -25,27 +27,15 @@
         /* ========================
            Scrollbar Styling
            ======================== */
-        /* Webkit (Chrome, Safari, Edge) */
-        *::-webkit-scrollbar {
-            width: 12px;
-        }
-        *::-webkit-scrollbar-track {
-            background: #1f1f1f;
-            border-radius: 8px;
-        }
+        *::-webkit-scrollbar { width: 12px; }
+        *::-webkit-scrollbar-track { background: #1f1f1f; border-radius: 8px; }
         *::-webkit-scrollbar-thumb {
             background-color: #4e4e4e;
             border-radius: 8px;
             border: 3px solid #1f1f1f;
         }
-        *::-webkit-scrollbar-thumb:hover {
-            background-color: #888;
-        }
-        /* Firefox */
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: #4e4e4e #1f1f1f;
-        }
+        *::-webkit-scrollbar-thumb:hover { background-color: #888; }
+        * { scrollbar-width: thin; scrollbar-color: #4e4e4e #1f1f1f; }
 
         /* ========================
            Container and Layout
@@ -93,8 +83,6 @@
             display: flex;
             flex-direction: column;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            border: 1px solid #333;
             height: 100%;
         }
         .right-column {
@@ -117,40 +105,41 @@
             border-radius: 50%;
             margin-bottom: 20px;
         }
-
-        /* Responsive Font Sizes */
-        h1 {
-            color: #ffffff;
-            font-size: clamp(1em, 1.2vw + 0.4em, 1.2em);
-            margin-bottom: 10px;
-        }
-        h2 {
-            color: #dddddd;
-            font-size: clamp(1em, 1.2vw + 0.4em, 1.0em);
-            margin-bottom: 10px;
-        }
-        h3 {
-            color: #bbbbbb;
-            font-size: clamp(0.8em, 1vw + 0.3em, 0.9em);
-            margin-bottom: 10px;
-            font-weight: normal;
-            font-style: italic;
-        }
-        p, ul, li {
-            color: #bbbbbb;
-            font-size: clamp(0.75em, 1vw + 0.3em, 0.8em);
-        }
-        .subtext {
-            color: #bbbbbb;
-            font-size: clamp(0.75em, 1vw + 0.3em, 0.8em);
-            margin-bottom: 10px;
-            font-weight: normal;
-            font-style: italic;
-        }
+        h1, h2, h3, p, ul, li { color: #bbbbbb; }
+        h1 { font-size: clamp(1em, 1.2vw + 0.4em, 1.2em); color: #ffffff; }
+        h2 { font-size: clamp(1em, 1.2vw + 0.4em, 1.0em); color: #dddddd; }
+        h3 { font-size: clamp(0.8em, 1vw + 0.3em, 0.9em); font-weight: normal; font-style: italic; }
+        p, ul, li, .subtext { font-size: clamp(0.75em, 1vw + 0.3em, 0.8em); }
+        .subtext { font-style: italic; }
 
         /* ========================
-        Footer Styling
-        ======================== */
+           Button Styling
+           ======================== */
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        #bottom-buttons {
+            background: #181818;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        #bottom-buttons svg {
+            width: 24px;
+            height: 24px;
+            color: #a0a0a0;
+        }
+        #bottom-buttons:hover { background-color: #555; }
+
+        /* ========================
+           Footer Styling
+           ======================== */
         footer {
             width: 100%;
             background-color: #181818;
@@ -160,63 +149,24 @@
             margin-top: 20px;
             font-size: clamp(0.6em, 0.75vw, 0.875em);
         }
-
-        footer p {
-            color: #444; /* Darker gray for footer text with !important */
-            font-size: clamp(0.6em, 0.75vw, 0.875em);
-        }
-
-        /* ========================
-           Button Styling
-           ======================== */
-        #bottom-buttons {
-            background: #181818; 
-            border: none;
-            padding: 8px; 
-            border-radius: 5px; 
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            margin-top: 10px; 
-            transition: background-color 0.3s ease;
-        }
-
-        /* Adjust the icon color and size */
-        #bottom-buttons svg {
-            width: 24px;
-            height: 24px;
-            color: #a0a0a0; 
-        }
-
-        /* Hover effect for button */
-        #bottom-buttons:hover {
-            background-color: #555; /* Slightly lighter gray on hover */
-        }
+        footer p { color: #444; }
 
         /* ========================
            Media Queries
            ======================== */
         @media (max-width: 850px) {
-            .container {
-                max-height: none; /* Allow container to expand fully */
-            }
-            h2 {
-                font-size: clamp(0.8em, 1vw, 1.1em);
-            }
-            p {
-                font-size: clamp(0.6em, 1vw, 0.85em);
-            }
-            footer p {
-                font-size: clamp(0.5em, 0.7vw, 0.75em);
-            }
-            .subtext {
-                font-size: clamp(0.6em, 0.8vw, 0.9em);
-            }
+            .container { max-height: none; }
+            h2 { font-size: clamp(0.8em, 1vw, 1.1em); }
+            p { font-size: clamp(0.6em, 1vw, 0.85em); }
+            footer p { font-size: clamp(0.5em, 0.7vw, 0.75em); }
+            .subtext { font-size: clamp(0.6em, 0.8vw, 0.9em); }
         }
-        
     </style>
+
+    <!-- PDF Export Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </head>
+
 <body>
     <div class="container-wrapper">
         <div class="container" id="resume-container">
@@ -224,17 +174,12 @@
                 <div class="left-column">
                     <div class="headshot"></div>
                     <div class="contact-info">
-                        <h1>Kieran Kim-Murphy</h2>
-                        <p class="subtext">
-                            Software Engineer<br>
-                            kieran@kjkm.dev<br>
-                            +1 (775) 710-1910<br>
-                            Reno, NV
-                        </p>
+                        <h1>Kieran Kim-Murphy</h1>
+                        <p class="subtext">Software Engineer<br>kieran@kjkm.dev<br>+1 (775) 710-1910<br>Reno, NV</p>
                     </div>
                     <div class="overview">
                         <h2>Overview</h2>
-                        <p>Software engineer in Reno, NV. Specialized in robotics, simulation, perception and mapping.</p>
+                        <p>Software engineer in Reno, NV. Specialized in robotics, simulation, perception, and mapping.</p>
                     </div>
                     <div class="overview">
                         <h2>Processes and Tools</h2>
@@ -264,23 +209,27 @@
         </div>
     </div>
 
+    <!-- Button Container for Social Media and PDF Download -->
     <div class="button-container">
         <button id="bottom-buttons" onclick="window.open('https://github.com/kjkm', '_blank')" title="View GitHub Profile">
+            <!-- GitHub Icon -->
             <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
                 <path d="M10 0C4.48 0 0 4.48 0 10c0 4.418 2.865 8.166 6.84 9.49.5.09.68-.217.68-.482 0-.237-.01-.867-.014-1.703-2.782.605-3.37-1.34-3.37-1.34-.454-1.155-1.11-1.464-1.11-1.464-.906-.62.07-.607.07-.607 1.002.07 1.53 1.033 1.53 1.033.89 1.526 2.335 1.085 2.9.83.09-.646.35-1.086.636-1.337-2.22-.252-4.555-1.113-4.555-4.947 0-1.093.39-1.987 1.03-2.687-.1-.253-.446-1.27.1-2.646 0 0 .84-.27 2.75 1.024A9.561 9.561 0 0110 4.905c.85.004 1.71.115 2.51.338 1.91-1.293 2.75-1.023 2.75-1.023.546 1.376.2 2.393.1 2.646.64.7 1.03 1.594 1.03 2.687 0 3.84-2.34 4.692-4.57 4.937.36.31.68.923.68 1.86 0 1.344-.012 2.427-.012 2.757 0 .268.18.576.688.48A10.013 10.013 0 0020 10c0-5.52-4.48-10-10-10z"/>
             </svg>
         </button>
 
         <button id="bottom-buttons" onclick="window.open('https://www.linkedin.com/in/kieran-kim-murphy-456a192a6/', '_blank')" title="View LinkedIn Profile">
+            <!-- LinkedIn Icon -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.5 8C7.32843 8 8 7.32843 8 6.5C8 5.67157 7.32843 5 6.5 5C5.67157 5 5 5.67157 5 6.5C5 7.32843 5.67157 8 6.5 8Z" />
                 <path d="M5 10C5 9.44772 5.44772 9 6 9H7C7.55228 9 8 9.44771 8 10V18C8 18.5523 7.55228 19 7 19H6C5.44772 19 5 18.5523 5 18V10Z" />
                 <path d="M11 19H12C12.5523 19 13 18.5523 13 18V13.5C13 12 16 11 16 13V18.0004C16 18.5527 16.4477 19 17 19H18C18.5523 19 19 18.5523 19 18V12C19 10 17.5 9 15.5 9C13.5 9 13 10.5 13 10.5V10C13 9.44771 12.5523 9 12 9H11C10.4477 9 10 9.44772 10 10V18C10 18.5523 10.4477 19 11 19Z" />
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M20 1C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H20ZM20 3C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3H20Z" />
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M20 1C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H20ZM20 3C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3 4 4 4H20Z"/>
             </svg>
         </button>
-    
+
         <button id="bottom-buttons" onclick="exportToPDF()" title="Download Resume PDF">
+            <!-- Download Icon -->
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor">
                 <path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                 <polyline points="7.9 12.3 12 16.3 16.1 12.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
@@ -288,61 +237,42 @@
             </svg>
         </button>
     </div>
-    
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Kieran Kim-Murphy. All rights reserved.</p>
     </footer>
 
-    <script>
+    <!-- Defer the scripts for improved loading speed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js" defer></script>
+
+    <script defer>
         // Adjust the container height based on content
         function adjustContainerHeight() {
             const container = document.getElementById('resume-container');
             const contentHeight = container.scrollHeight;
-
-            // When the width is below 850px, adapt height if needed
             if (window.innerWidth < 850 && contentHeight > container.clientHeight) {
                 container.style.height = `${contentHeight}px`;
             } else if (window.innerWidth >= 850) {
-                // Reset for larger screens
                 container.style.height = 'auto';
                 container.style.maxHeight = '1100px';
             }
         }
-
-        // Run adjustments on page load and window resize
         window.addEventListener('resize', adjustContainerHeight);
         window.addEventListener('load', adjustContainerHeight);
-    </script>
 
-    <script>
         // Function to export the resume content to a PDF
         function exportToPDF() {
             const resumeElement = document.getElementById('resume-content-wrapper');
-            
-            // Define temporary light mode styles
             const lightModeStyles = `
-                body, .container, .left-column, .right-column {
-                    background-color: #ffffff !important;
-                    color: #000000 !important;
-                }
-                h1, h2, h3, p, ul, li, .subtext {
-                    color: #000000 !important;
-                }
-                .headshot {
-                    background-color: #ccc !important; /* Lighter headshot placeholder */
-                }
-                .container {
-                    border: 1px solid #333 !important;
-                    box-shadow: none !important;
-                }
+                body, .container, .left-column, .right-column { background-color: #ffffff !important; color: #000000 !important; }
+                h1, h2, h3, p, ul, li, .subtext { color: #000000 !important; }
+                .headshot { background-color: #ccc !important; }
+                .container { border: 1px solid #333 !important; box-shadow: none !important; }
             `;
-
-            // Create a style element to apply light mode styles
             const styleElement = document.createElement('style');
             styleElement.innerHTML = lightModeStyles;
             document.head.appendChild(styleElement);
-
-            // PDF generation options
             const options = {
                 margin: 0.5,
                 filename: 'Kieran_Kim-Murphy_Resume.pdf',
@@ -350,14 +280,10 @@
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
-
-            // Generate the PDF
             html2pdf().set(options).from(resumeElement).save().then(() => {
-                // Remove the temporary light mode styles after the PDF is generated
                 document.head.removeChild(styleElement);
             });
         }
     </script>
 </body>
 </html>
-
