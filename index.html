@@ -9,40 +9,51 @@
         body {
             background-color: #181818;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             min-height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow-y: auto; /* Enable page scrolling */
+            overflow-y: auto;
             padding: 20px;
             box-sizing: border-box;
+            flex-direction: column;
         }
 
-        /* Container with fixed aspect ratio and maximum dimensions */
+        /* Container wrapper */
+        .container-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 850px;
+            overflow-y: auto;
+        }
+
+        /* Main container */
         .container {
             background-color: #1f1f1f;
             width: 100%;
             max-width: 850px;
             aspect-ratio: 8.5 / 11;
             height: auto;
-            max-height: calc(100vw * (11 / 8.5)); /* Responsive height to keep aspect ratio */
+            max-height: 1100px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             border-radius: 8px;
             border: 1px solid #333;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Prevent internal scrolling */
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
-        /* Content layout styling */
+        /* Content layout */
         .content {
             display: flex;
             width: 100%;
-            height: 100%;
-            box-sizing: border-box;
             padding: 20px;
+            box-sizing: border-box;
+            flex-grow: 1; /* Ensure content spans full height */
         }
 
         /* Left column styling */
@@ -52,6 +63,10 @@
             padding: 20px;
             box-sizing: border-box;
             border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensure left column spans full container height */
+            overflow: hidden; /* Prevent scrollbars in left column */
         }
 
         /* Right column styling */
@@ -60,12 +75,15 @@
             padding: 20px;
             box-sizing: border-box;
             color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensure right column spans full container height */
         }
 
-        /* Headshot styling */
+        /* Headshot styling with responsive scaling */
         .headshot {
-            width: 100px;
-            height: 100px;
+            width: clamp(50px, 8vw, 100px);
+            height: clamp(50px, 8vw, 100px);
             background-color: #444;
             border-radius: 50%;
             margin-bottom: 20px;
@@ -73,69 +91,78 @@
 
         /* Footer styling */
         footer {
-            height: 40px;
             width: 100%;
             background-color: #181818;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
-        }
-
-        footer p {
             color: #4e4e4e;
-            font-size: 0.875em;
-            margin: 0;
+            font-size: clamp(0.6em, 0.75vw, 0.875em);
         }
 
+        /* Responsive font sizes */
         h1 {
             color: #ffffff;
-            font-size: 1.3em;
+            font-size: clamp(1em, 1.2vw + 0.4em, 1.3em);
             margin-bottom: 10px;
         }
 
         p {
             color: #e0e0e0;
-            font-size: 0.9em;
+            font-size: clamp(0.75em, 1vw + 0.3em, 1em);
         }
 
-        /* Responsive adjustment for small screens */
+        /* For narrow viewports */
         @media (max-width: 850px) {
             .container {
-                width: 100%;
-                height: auto; /* Allow height to scale with aspect ratio */
+                max-height: none; /* Allow container to expand fully */
+            }
+
+            h1 {
+                font-size: clamp(0.8em, 1vw, 1.1em);
+            }
+
+            p {
+                font-size: clamp(0.6em, 1vw, 0.85em);
+            }
+
+            footer p {
+                font-size: clamp(0.5em, 0.7vw, 0.75em);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <div class="left-column">
-                <div class="headshot"></div>
-                <div class="contact-info">
-                    <h1>Kieran Kim-Murphy</h1>
-                    <p>Email: kieran@kjkm.dev</p>
-                    <p>Phone: +1 (775) 710-1910</p>
-                    <p>Location: Reno, NV</p>
+    <div class="container-wrapper">
+        <div class="container" id="resume-container">
+            <div class="content">
+                <div class="left-column">
+                    <div class="headshot"></div>
+                    <div class="contact-info">
+                        <h1>Kieran Kim-Murphy</h1>
+                        <p>Email: kieran@kjkm.dev</p>
+                        <p>Phone: +1 (775) 710-1910</p>
+                        <p>Location: Reno, NV</p>
+                    </div>
+                    <div class="overview">
+                        <h1>Overview</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
                 </div>
-                <div class="overview">
-                    <h1>Overview</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="right-column">
-                <div class="resume-content">
-                    <h1>Experience</h1>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-                <div class="resume-content">
-                    <h1>Education</h1>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                </div>
-                <div class="resume-content">
-                    <h1>Skills</h1>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <div class="right-column">
+                    <div class="resume-content">
+                        <h1>Experience</h1>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    <div class="resume-content">
+                        <h1>Education</h1>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                    <div class="resume-content">
+                        <h1>Skills</h1>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,5 +170,25 @@
     <footer>
         <p>&copy; 2024 Kieran Kim-Murphy. All rights reserved.</p>
     </footer>
+
+    <script>
+        function adjustContainerHeight() {
+            const container = document.getElementById('resume-container');
+            const contentHeight = container.scrollHeight;
+
+            // When the width is below 850px, adapt height if needed
+            if (window.innerWidth < 850 && contentHeight > container.clientHeight) {
+                container.style.height = `${contentHeight}px`;
+            } else if (window.innerWidth >= 850) {
+                // Reset for larger screens
+                container.style.height = 'auto';
+                container.style.maxHeight = '1100px';
+            }
+        }
+
+        // Run adjustments on page load and window resize
+        window.addEventListener('resize', adjustContainerHeight);
+        window.addEventListener('load', adjustContainerHeight);
+    </script>
 </body>
 </html>
