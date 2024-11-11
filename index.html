@@ -121,12 +121,31 @@
         /* Responsive Font Sizes */
         h1 {
             color: #ffffff;
-            font-size: clamp(1em, 1.2vw + 0.4em, 1.3em);
+            font-size: clamp(1em, 1.2vw + 0.4em, 1.2em);
             margin-bottom: 10px;
         }
-        p {
-            color: #e0e0e0;
-            font-size: clamp(0.75em, 1vw + 0.3em, 1em);
+        h2 {
+            color: #dddddd;
+            font-size: clamp(1em, 1.2vw + 0.4em, 1.0em);
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #bbbbbb;
+            font-size: clamp(0.8em, 1vw + 0.3em, 0.9em);
+            margin-bottom: 10px;
+            font-weight: normal;
+            font-style: italic;
+        }
+        p, ul, li {
+            color: #bbbbbb;
+            font-size: clamp(0.75em, 1vw + 0.3em, 0.8em);
+        }
+        .subtext {
+            color: #bbbbbb;
+            font-size: clamp(0.75em, 1vw + 0.3em, 0.8em);
+            margin-bottom: 10px;
+            font-weight: normal;
+            font-style: italic;
         }
 
         /* ========================
@@ -154,7 +173,7 @@
             .container {
                 max-height: none; /* Allow container to expand fully */
             }
-            h1 {
+            h2 {
                 font-size: clamp(0.8em, 1vw, 1.1em);
             }
             p {
@@ -162,6 +181,9 @@
             }
             footer p {
                 font-size: clamp(0.5em, 0.7vw, 0.75em);
+            }
+            .subtext {
+                font-size: clamp(0.6em, 0.8vw, 0.9em);
             }
         }
     </style>
@@ -173,27 +195,39 @@
                 <div class="left-column">
                     <div class="headshot"></div>
                     <div class="contact-info">
-                        <h1>Kieran Kim-Murphy</h1>
-                        <p>Email: kieran@kjkm.dev</p>
-                        <p>Phone: +1 (775) 710-1910</p>
-                        <p>Location: Reno, NV</p>
+                        <h1>Kieran Kim-Murphy</h2>
+                        <p class="subtext">
+                            Software Engineer<br>
+                            kieran@kjkm.dev<br>
+                            +1 (775) 710-1910<br>
+                            Reno, NV
+                        </p>
                     </div>
                     <div class="overview">
-                        <h1>Overview</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <h2>Overview</h2>
+                        <p>Software engineer in Reno, NV. Specialized in robotics, simulation, perception and mapping.</p>
+                    </div>
+                    <div class="overview">
+                        <h2>Processes and Tools</h2>
+                        <ul>
+                            <li>ROS</li>
+                            <li>Unreal Engine</li>
+                            <li>Git, GitHub, Bitbucket</li>
+                            <li>MAVLink, ArduPilot</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="right-column">
                     <div class="resume-content">
-                        <h1>Experience</h1>
+                        <h2>Experience</h2>
                         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                     </div>
                     <div class="resume-content">
-                        <h1>Education</h1>
+                        <h2>Education</h2>
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                     </div>
                     <div class="resume-content">
-                        <h1>Skills</h1>
+                        <h2>Skills</h2>
                         <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </div>
                 </div>
