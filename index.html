@@ -64,7 +64,7 @@
             aspect-ratio: 8.5 / 11;
             height: auto;
             max-height: 1100px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             border-radius: 8px;
             border: 1px solid #333;
             display: flex;
@@ -92,6 +92,9 @@
             border-right: 1px solid #333;
             display: flex;
             flex-direction: column;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #333;
             height: 100%;
         }
         .right-column {
@@ -127,8 +130,8 @@
         }
 
         /* ========================
-           Footer Styling
-           ======================== */
+        Footer Styling
+        ======================== */
         footer {
             width: 100%;
             background-color: #181818;
@@ -136,7 +139,11 @@
             justify-content: center;
             align-items: center;
             margin-top: 20px;
-            color: #4e4e4e;
+            font-size: clamp(0.6em, 0.75vw, 0.875em);
+        }
+
+        footer p {
+            color: #444; /* Darker gray for footer text with !important */
             font-size: clamp(0.6em, 0.75vw, 0.875em);
         }
 
