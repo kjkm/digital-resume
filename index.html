@@ -5,41 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Digital Resume</title>
     <style>
+        /* Body styling */
         body {
             background-color: #181818;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow-y: auto;
+            overflow-y: auto; /* Enable page scrolling */
             padding: 20px;
             box-sizing: border-box;
         }
 
+        /* Container with fixed aspect ratio and maximum dimensions */
         .container {
             background-color: #1f1f1f;
             width: 100%;
             max-width: 850px;
-            height: auto;
             aspect-ratio: 8.5 / 11;
+            height: auto;
+            max-height: calc(100vw * (11 / 8.5)); /* Responsive height to keep aspect ratio */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             border-radius: 8px;
             border: 1px solid #333;
-            position: relative;
-            overflow: hidden; 
-            flex-shrink: 0; 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Prevent internal scrolling */
         }
 
+        /* Content layout styling */
         .content {
-            padding: 20px;
+            display: flex;
             width: 100%;
             height: 100%;
             box-sizing: border-box;
+            padding: 20px;
         }
 
+        /* Left column styling */
+        .left-column {
+            background-color: #2a2a2a;
+            width: 30%;
+            padding: 20px;
+            box-sizing: border-box;
+            border-right: 1px solid #333;
+        }
+
+        /* Right column styling */
+        .right-column {
+            width: 70%;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #e0e0e0;
+        }
+
+        /* Headshot styling */
+        .headshot {
+            width: 100px;
+            height: 100px;
+            background-color: #444;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        /* Footer styling */
         footer {
             height: 40px;
             width: 100%;
@@ -58,18 +90,20 @@
 
         h1 {
             color: #ffffff;
-            font-size: 2em;
+            font-size: 1.3em;
+            margin-bottom: 10px;
         }
 
         p {
             color: #e0e0e0;
-            font-size: 1em;
+            font-size: 0.9em;
         }
 
+        /* Responsive adjustment for small screens */
         @media (max-width: 850px) {
             .container {
                 width: 100%;
-                height: auto;
+                height: auto; /* Allow height to scale with aspect ratio */
             }
         }
     </style>
@@ -77,9 +111,33 @@
 <body>
     <div class="container">
         <div class="content">
-            <h1>Welcome to my digital resume!</h1>
-            <p>This is a paragraph.</p>
-            <p>This is another paragraph.</p>
+            <div class="left-column">
+                <div class="headshot"></div>
+                <div class="contact-info">
+                    <h1>Kieran Kim-Murphy</h1>
+                    <p>Email: kieran@kjkm.dev</p>
+                    <p>Phone: +1 (775) 710-1910</p>
+                    <p>Location: Reno, NV</p>
+                </div>
+                <div class="overview">
+                    <h1>Overview</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="resume-content">
+                    <h1>Experience</h1>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="resume-content">
+                    <h1>Education</h1>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+                <div class="resume-content">
+                    <h1>Skills</h1>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
         </div>
     </div>
     <footer>
