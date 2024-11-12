@@ -35,3 +35,18 @@ function exportToPDF() {
         document.head.removeChild(styleElement);
     });
 }
+
+// Function to toggle the left column
+function toggleLeftColumn() {
+    const leftColumn = document.getElementById('left-column');
+    const toggleBtn = document.getElementById('toggle-btn');
+    
+    leftColumn.classList.toggle('expanded');
+    
+    // Update the button text based on the expanded state
+    if (leftColumn.classList.contains('expanded')) {
+        toggleBtn.innerHTML = '&#8249;'; // Left arrow
+    } else {
+        toggleBtn.innerHTML = '&#8250;'; // Right arrow
+    }
+}
