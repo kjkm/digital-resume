@@ -1,24 +1,139 @@
-// Adjust the container height based on content
-function adjustContainerHeight() {
-    const container = document.getElementById('resume-container');
-    if (window.innerWidth < 850) {
-        // For mobile, enforce the aspect ratio by setting height based on width
-        const width = container.clientWidth;
-        container.style.height = `${width * (11 / 8.5)}px`;
+// Function to set the mobile or desktop layout based on screen width
+function applyResponsiveLayout() {
+    const isMobile = window.innerWidth < 850;
+    const leftColumn = document.getElementById('left-column');
+    const rightColumn = document.querySelector('.right-column');
+    const toggleBtn = document.getElementById('toggle-btn');
+    const leftParagraphs = leftColumn.querySelectorAll('p');
+    const rightParagraphs = rightColumn.querySelectorAll('p');
+    const leftHeaders = leftColumn.querySelectorAll('h1, h2, h3');
+    const rightHeaders = rightColumn.querySelectorAll('h1, h2, h3');
+    const leftLists = leftColumn.querySelectorAll('ul, li');
+    const rightLists = rightColumn.querySelectorAll('ul, li');
+
+    if (isMobile) {
+        // Mobile layout - Apply default mobile state (left column collapsed)
+        leftColumn.classList.remove('expanded');
+        toggleBtn.innerHTML = '&#8250;'; // Right arrow
+
+        // Hide left column content, grey out headers
+        leftParagraphs.forEach(paragraph => {
+            paragraph.style.display = 'none';
+        });
+        leftHeaders.forEach(header => {
+            header.style.color = '#666666';
+        });
+        leftLists.forEach(list => {
+            list.style.display = 'none';
+        });
+
+        // Ensure right column content is visible and original styles are applied
+        rightParagraphs.forEach(paragraph => {
+            paragraph.style.display = '';
+        });
+        rightHeaders.forEach(header => {
+            header.style.color = ''; 
+        });
+        rightLists.forEach(list => {
+            list.style.display = '';
+        });
     } else {
-        // Desktop view: enforce max height
-        container.style.height = 'auto';
-        container.style.maxHeight = '1100px';
+        // Desktop layout - Show both columns fully without hidden content or greyed-out headers
+        leftParagraphs.forEach(paragraph => {
+            paragraph.style.display = '';
+        });
+        leftHeaders.forEach(header => {
+            header.style.color = '';
+        });
+        leftLists.forEach(list => {
+            list.style.display = '';
+        });
+
+        rightParagraphs.forEach(paragraph => {
+            paragraph.style.display = '';
+        });
+        rightHeaders.forEach(header => {
+            header.style.color = '';
+        });
+        rightLists.forEach(list => {
+            list.style.display = '';
+        });
+
+        leftColumn.classList.remove('expanded');
+        toggleBtn.innerHTML = ''; // Hide toggle button on desktop
     }
 }
-window.addEventListener('resize', adjustContainerHeight);
-window.addEventListener('load', adjustContainerHeight);
+
+// Function to toggle the left column and update paragraph, header styles, and list visibility
+function toggleLeftColumn() {
+    const leftColumn = document.getElementById('left-column');
+    const rightColumn = document.querySelector('.right-column');
+    const toggleBtn = document.getElementById('toggle-btn');
+    const leftParagraphs = leftColumn.querySelectorAll('p');
+    const rightParagraphs = rightColumn.querySelectorAll('p');
+    const leftHeaders = leftColumn.querySelectorAll('h1, h2, h3');
+    const rightHeaders = rightColumn.querySelectorAll('h1, h2, h3');
+    const leftLists = leftColumn.querySelectorAll('ul, li');
+    const rightLists = rightColumn.querySelectorAll('ul, li');
+    
+    // Toggle the expanded state
+    leftColumn.classList.toggle('expanded');
+
+    if (leftColumn.classList.contains('expanded')) {
+        // Left column expanded - Show left column content, grey out right column
+        leftParagraphs.forEach(paragraph => {
+            paragraph.style.display = ''; 
+        });
+        leftHeaders.forEach(header => {
+            header.style.color = ''; 
+        });
+        leftLists.forEach(list => {
+            list.style.display = ''; 
+        });
+
+        // Hide right column content and grey out headers
+        rightParagraphs.forEach(paragraph => {
+            paragraph.style.display = 'none';
+        });
+        rightHeaders.forEach(header => {
+            header.style.color = '#666666'; // Grey out color
+        });
+        rightLists.forEach(list => {
+            list.style.display = 'none';
+        });
+
+        toggleBtn.innerHTML = '&#8249;'; // Left arrow
+    } else {
+        // Left column collapsed - Show right column content, grey out left column
+        leftParagraphs.forEach(paragraph => {
+            paragraph.style.display = 'none';
+        });
+        leftHeaders.forEach(header => {
+            header.style.color = '#666666';
+        });
+        leftLists.forEach(list => {
+            list.style.display = 'none';
+        });
+
+        // Restore right column content and headers to original styles
+        rightParagraphs.forEach(paragraph => {
+            paragraph.style.display = '';
+        });
+        rightHeaders.forEach(header => {
+            header.style.color = ''; 
+        });
+        rightLists.forEach(list => {
+            list.style.display = '';
+        });
+
+        toggleBtn.innerHTML = '&#8250;'; // Right arrow
+    }
+}
 
 // Function to export the resume content to a PDF
 function exportToPDF() {
     const resumeElement = document.getElementById('resume-content-wrapper');
-    
-    // Desktop styling to enforce full layout for PDF export
+
     const desktopStyles = `
         .container {
             width: 850px !important;
@@ -33,23 +148,31 @@ function exportToPDF() {
         }
         .right-column {
             width: 70% !important;
+            display: block !important;
         }
-        .toggle-btn {
+        .left-column .toggle-btn {
             display: none !important;
+        }
+        .left-column.expanded, .right-column.expanded {
+            width: 30% !important;
+        }
+        .left-column h1, .left-column h2, .left-column h3,
+        .right-column h1, .right-column h2, .right-column h3,
+        .left-column p, .right-column p,
+        .left-column ul, .right-column ul,
+        .left-column li, .right-column li {
+            display: block !important;
+            color: #000000 !important;
         }
         body, .container, .left-column, .right-column {
             background-color: #ffffff !important;
-            color: #000000 !important;
-        }
-        h1, h2, h3, p, ul, li, .subtext {
             color: #000000 !important;
         }
         .headshot {
             background-color: #ccc !important;
         }
     `;
-    
-    // Create a style element to apply desktop styles
+
     const styleElement = document.createElement('style');
     styleElement.innerHTML = desktopStyles;
     document.head.appendChild(styleElement);
@@ -65,21 +188,10 @@ function exportToPDF() {
 
     // Generate PDF and remove the desktop style after completion
     html2pdf().set(options).from(resumeElement).save().then(() => {
-        document.head.removeChild(styleElement); // Clean up by removing the style
+        document.head.removeChild(styleElement); 
     });
 }
 
-// Function to toggle the left column
-function toggleLeftColumn() {
-    const leftColumn = document.getElementById('left-column');
-    const toggleBtn = document.getElementById('toggle-btn');
-    
-    leftColumn.classList.toggle('expanded');
-    
-    // Update the button text based on the expanded state
-    if (leftColumn.classList.contains('expanded')) {
-        toggleBtn.innerHTML = '&#8249;'; // Left arrow
-    } else {
-        toggleBtn.innerHTML = '&#8250;'; // Right arrow
-    }
-}
+// Event listeners for responsive layout
+window.addEventListener('load', applyResponsiveLayout);
+window.addEventListener('resize', applyResponsiveLayout);

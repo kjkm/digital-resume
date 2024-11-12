@@ -83,32 +83,23 @@
    Toggle Button Styling
    ======================== */
 
-.toggle-btn {
-    display: none; /* Hidden by default, visible only on small screens */
-    position: absolute;
-    top: 5px;
-    right: -5px;
-    background-color: transparent;
-    border: none;
-    color: #aaa;
-    cursor: pointer;
-    padding: 5px 10px;
-    font-size: 1.1em;
-    border-radius: 0 5px 5px 0;
-    z-index: 10;
-}
-
 @media (max-width: 850px) {
     .toggle-btn {
         display: block; /* Show toggle button only on screens smaller than 850px */
     }
 
-    /* Mobile Layout for Overflow */
     .container {
-        max-height: none;
-        height: auto;
-        overflow-y: auto;
-        aspect-ratio: 8.5 / 11;
+        display: inline-flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        height: auto; 
+        overflow: visible; 
+        aspect-ratio: auto; 
+    }
+
+    .content, .right-column, .left-column {
+        flex-grow: 1; 
     }
 }
 
