@@ -1,4 +1,4 @@
-// Function to set the mobile or desktop layout based on screen width
+// Function to set the mobile or desktop layout based on screen width and height
 function applyResponsiveLayout() {
     const isMobile = window.innerWidth < 850;
     const leftColumn = document.getElementById('left-column');
@@ -12,9 +12,9 @@ function applyResponsiveLayout() {
     const rightLists = rightColumn.querySelectorAll('ul, li');
 
     if (isMobile) {
-        // Mobile layout - Apply default mobile state (left column collapsed)
-        leftColumn.classList.remove('expanded');
-        toggleBtn.innerHTML = '&#8250;'; // Right arrow
+        // Mobile layout adjustments
+        leftColumn.classList.remove('expanded'); // Default to collapsed state
+        toggleBtn.innerHTML = '&#8250;'; // Show right arrow
 
         // Hide left column content, grey out headers
         leftParagraphs.forEach(paragraph => {
@@ -27,18 +27,27 @@ function applyResponsiveLayout() {
             list.style.display = 'none';
         });
 
-        // Ensure right column content is visible and original styles are applied
+        // Ensure right column content is visible
         rightParagraphs.forEach(paragraph => {
             paragraph.style.display = '';
         });
         rightHeaders.forEach(header => {
-            header.style.color = ''; 
+            header.style.color = ''; // Reset to original color
         });
         rightLists.forEach(list => {
             list.style.display = '';
         });
+
+        // Adjust container height to fit mobile screens in vertical mode
+        const container = document.getElementById('resume-container');
+        const aspectRatio = 11 / 8.5; // Standard aspect ratio for 8.5x11
+        if (window.innerHeight / window.innerWidth < aspectRatio) {
+            container.style.height = `${window.innerHeight - 40}px`; // Adjust for padding
+        } else {
+            container.style.height = 'auto';
+        }
     } else {
-        // Desktop layout - Show both columns fully without hidden content or greyed-out headers
+        // Desktop layout adjustments
         leftParagraphs.forEach(paragraph => {
             paragraph.style.display = '';
         });
@@ -59,8 +68,13 @@ function applyResponsiveLayout() {
             list.style.display = '';
         });
 
+        // Reset toggle button and expanded state
         leftColumn.classList.remove('expanded');
         toggleBtn.innerHTML = ''; // Hide toggle button on desktop
+
+        // Restore default height
+        const container = document.getElementById('resume-container');
+        container.style.height = 'auto';
     }
 }
 
@@ -75,20 +89,21 @@ function toggleLeftColumn() {
     const rightHeaders = rightColumn.querySelectorAll('h1, h2, h3');
     const leftLists = leftColumn.querySelectorAll('ul, li');
     const rightLists = rightColumn.querySelectorAll('ul, li');
-    
+
     // Toggle the expanded state
     leftColumn.classList.toggle('expanded');
+    leftColumn.dataset.toggled = leftColumn.classList.contains('expanded'); // Save toggle state
 
     if (leftColumn.classList.contains('expanded')) {
         // Left column expanded - Show left column content, grey out right column
         leftParagraphs.forEach(paragraph => {
-            paragraph.style.display = ''; 
+            paragraph.style.display = '';
         });
         leftHeaders.forEach(header => {
-            header.style.color = ''; 
+            header.style.color = '';
         });
         leftLists.forEach(list => {
-            list.style.display = ''; 
+            list.style.display = '';
         });
 
         // Hide right column content and grey out headers
@@ -96,12 +111,13 @@ function toggleLeftColumn() {
             paragraph.style.display = 'none';
         });
         rightHeaders.forEach(header => {
-            header.style.color = '#666666'; // Grey out color
+            header.style.color = '#666666';
         });
         rightLists.forEach(list => {
             list.style.display = 'none';
         });
 
+        // Update toggle button to show a left arrow
         toggleBtn.innerHTML = '&#8249;'; // Left arrow
     } else {
         // Left column collapsed - Show right column content, grey out left column
@@ -120,15 +136,29 @@ function toggleLeftColumn() {
             paragraph.style.display = '';
         });
         rightHeaders.forEach(header => {
-            header.style.color = ''; 
+            header.style.color = ''; // Restore original color
         });
         rightLists.forEach(list => {
             list.style.display = '';
         });
 
+        // Update toggle button to show right arrow
         toggleBtn.innerHTML = '&#8250;'; // Right arrow
     }
 }
+
+// Function to apply toggle state on scroll to prevent reset
+function applyToggleState() {
+    const leftColumn = document.getElementById('left-column');
+    if (leftColumn.dataset.toggled === 'true') {
+        leftColumn.classList.add('expanded');
+    }
+}
+
+// Event listeners
+window.addEventListener('load', applyResponsiveLayout);
+window.addEventListener('resize', applyResponsiveLayout);
+window.addEventListener('scroll', applyToggleState);
 
 // Function to export the resume content to a PDF
 function exportToPDF() {
@@ -191,7 +221,3 @@ function exportToPDF() {
         document.head.removeChild(styleElement); 
     });
 }
-
-// Event listeners for responsive layout
-window.addEventListener('load', applyResponsiveLayout);
-window.addEventListener('resize', applyResponsiveLayout);
