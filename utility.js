@@ -15,15 +15,44 @@ window.addEventListener('load', adjustContainerHeight);
 // Function to export the resume content to a PDF
 function exportToPDF() {
     const resumeElement = document.getElementById('resume-content-wrapper');
-    const lightModeStyles = `
-        body, .container, .left-column, .right-column { background-color: #ffffff !important; color: #000000 !important; }
-        h1, h2, h3, p, ul, li, .subtext { color: #000000 !important; }
-        .headshot { background-color: #ccc !important; }
-        .container { border: 1px solid #333 !important; box-shadow: none !important; }
+    
+    // Desktop styling to enforce full layout for PDF export
+    const desktopStyles = `
+        .container {
+            width: 850px !important;
+            height: 1100px !important;
+            max-width: none !important;
+            max-height: none !important;
+            overflow: visible !important;
+        }
+        .left-column {
+            width: 30% !important;
+            display: block !important;
+        }
+        .right-column {
+            width: 70% !important;
+        }
+        .toggle-btn {
+            display: none !important;
+        }
+        body, .container, .left-column, .right-column {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+        h1, h2, h3, p, ul, li, .subtext {
+            color: #000000 !important;
+        }
+        .headshot {
+            background-color: #ccc !important;
+        }
     `;
+    
+    // Create a style element to apply desktop styles
     const styleElement = document.createElement('style');
-    styleElement.innerHTML = lightModeStyles;
+    styleElement.innerHTML = desktopStyles;
     document.head.appendChild(styleElement);
+
+    // PDF export options
     const options = {
         margin: 0.5,
         filename: 'Kieran_Kim-Murphy_Resume.pdf',
@@ -31,8 +60,10 @@ function exportToPDF() {
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
+
+    // Generate PDF and remove the desktop style after completion
     html2pdf().set(options).from(resumeElement).save().then(() => {
-        document.head.removeChild(styleElement);
+        document.head.removeChild(styleElement); // Clean up by removing the style
     });
 }
 
