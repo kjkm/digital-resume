@@ -103,6 +103,18 @@
     }
 }
 
+/* Hide toggle button by default on larger screens */
+@media (min-width: 850px) {
+    .toggle-btn {
+        display: none !important; /* Force hidden on desktop */
+    }
+}
+
+@media (max-width: 850px) {
+    .toggle-btn {
+        display: block !important; /* Show toggle on mobile */
+    }
+}
 /* ========================
    Content Element Styling
    ======================== */

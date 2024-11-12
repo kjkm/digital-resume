@@ -1,88 +1,20 @@
-// Function to set the mobile or desktop layout based on screen width and height
-function applyResponsiveLayout() {
-    const isMobile = window.innerWidth < 850;
-    const leftColumn = document.getElementById('left-column');
-    const rightColumn = document.querySelector('.right-column');
-    const toggleBtn = document.getElementById('toggle-btn');
-    const leftParagraphs = leftColumn.querySelectorAll('p');
-    const rightParagraphs = rightColumn.querySelectorAll('p');
-    const leftHeaders = leftColumn.querySelectorAll('h1, h2, h3');
-    const rightHeaders = rightColumn.querySelectorAll('h1, h2, h3');
-    const leftLists = leftColumn.querySelectorAll('ul, li');
-    const rightLists = rightColumn.querySelectorAll('ul, li');
-
-    if (isMobile) {
-        // Mobile layout adjustments
-        leftColumn.classList.remove('expanded'); // Default to collapsed state
-        toggleBtn.innerHTML = '&#8250;'; // Show right arrow
-
-        // Hide left column content, grey out headers
-        leftParagraphs.forEach(paragraph => {
-            paragraph.style.display = 'none';
-        });
-        leftHeaders.forEach(header => {
-            header.style.color = '#666666';
-        });
-        leftLists.forEach(list => {
-            list.style.display = 'none';
-        });
-
-        // Ensure right column content is visible
-        rightParagraphs.forEach(paragraph => {
-            paragraph.style.display = '';
-        });
-        rightHeaders.forEach(header => {
-            header.style.color = ''; // Reset to original color
-        });
-        rightLists.forEach(list => {
-            list.style.display = '';
-        });
-
-        // Adjust container height to fit mobile screens in vertical mode
-        const container = document.getElementById('resume-container');
-        const aspectRatio = 11 / 8.5; // Standard aspect ratio for 8.5x11
-        if (window.innerHeight / window.innerWidth < aspectRatio) {
-            container.style.height = `${window.innerHeight - 40}px`; // Adjust for padding
-        } else {
-            container.style.height = 'auto';
-        }
-    } else {
-        // Desktop layout adjustments
-        leftParagraphs.forEach(paragraph => {
-            paragraph.style.display = '';
-        });
-        leftHeaders.forEach(header => {
-            header.style.color = '';
-        });
-        leftLists.forEach(list => {
-            list.style.display = '';
-        });
-
-        rightParagraphs.forEach(paragraph => {
-            paragraph.style.display = '';
-        });
-        rightHeaders.forEach(header => {
-            header.style.color = '';
-        });
-        rightLists.forEach(list => {
-            list.style.display = '';
-        });
-
-        // Reset toggle button and expanded state
-        leftColumn.classList.remove('expanded');
-        toggleBtn.innerHTML = ''; // Hide toggle button on desktop
-
-        // Restore default height
-        const container = document.getElementById('resume-container');
-        container.style.height = 'auto';
-    }
-}
-
-// Function to toggle the left column and update paragraph, header styles, and list visibility
+// Toggle functionality for the left column on mobile
 function toggleLeftColumn() {
     const leftColumn = document.getElementById('left-column');
-    const rightColumn = document.querySelector('.right-column');
     const toggleBtn = document.getElementById('toggle-btn');
+    const isExpanded = leftColumn.classList.contains('expanded');
+
+    leftColumn.classList.toggle('expanded', !isExpanded);
+    leftColumn.dataset.toggled = !isExpanded ? 'true' : 'false';
+    toggleBtn.innerHTML = isExpanded ? '&#8250;' : '&#8249;';
+    
+    applyColumnVisibility(!isExpanded);
+}
+
+// Apply column visibility for mobile toggling
+function applyColumnVisibility(showLeftColumn) {
+    const leftColumn = document.getElementById('left-column');
+    const rightColumn = document.querySelector('.right-column');
     const leftParagraphs = leftColumn.querySelectorAll('p');
     const rightParagraphs = rightColumn.querySelectorAll('p');
     const leftHeaders = leftColumn.querySelectorAll('h1, h2, h3');
@@ -90,75 +22,57 @@ function toggleLeftColumn() {
     const leftLists = leftColumn.querySelectorAll('ul, li');
     const rightLists = rightColumn.querySelectorAll('ul, li');
 
-    // Toggle the expanded state
-    leftColumn.classList.toggle('expanded');
-    leftColumn.dataset.toggled = leftColumn.classList.contains('expanded'); // Save toggle state
-
-    if (leftColumn.classList.contains('expanded')) {
-        // Left column expanded - Show left column content, grey out right column
-        leftParagraphs.forEach(paragraph => {
-            paragraph.style.display = '';
-        });
-        leftHeaders.forEach(header => {
-            header.style.color = '';
-        });
-        leftLists.forEach(list => {
-            list.style.display = '';
-        });
-
-        // Hide right column content and grey out headers
-        rightParagraphs.forEach(paragraph => {
-            paragraph.style.display = 'none';
-        });
-        rightHeaders.forEach(header => {
-            header.style.color = '#666666';
-        });
-        rightLists.forEach(list => {
-            list.style.display = 'none';
-        });
-
-        // Update toggle button to show a left arrow
-        toggleBtn.innerHTML = '&#8249;'; // Left arrow
+    if (showLeftColumn) {
+        leftParagraphs.forEach(paragraph => paragraph.style.display = '');
+        leftHeaders.forEach(header => header.style.color = '');
+        leftLists.forEach(list => list.style.display = ''); 
+        rightParagraphs.forEach(paragraph => paragraph.style.display = 'none');
+        rightHeaders.forEach(header => header.style.color = '#666666');
+        rightLists.forEach(list => list.style.display = 'none');
     } else {
-        // Left column collapsed - Show right column content, grey out left column
-        leftParagraphs.forEach(paragraph => {
-            paragraph.style.display = 'none';
-        });
-        leftHeaders.forEach(header => {
-            header.style.color = '#666666';
-        });
-        leftLists.forEach(list => {
-            list.style.display = 'none';
-        });
-
-        // Restore right column content and headers to original styles
-        rightParagraphs.forEach(paragraph => {
-            paragraph.style.display = '';
-        });
-        rightHeaders.forEach(header => {
-            header.style.color = ''; // Restore original color
-        });
-        rightLists.forEach(list => {
-            list.style.display = '';
-        });
-
-        // Update toggle button to show right arrow
-        toggleBtn.innerHTML = '&#8250;'; // Right arrow
+        leftParagraphs.forEach(paragraph => paragraph.style.display = 'none');
+        leftHeaders.forEach(header => header.style.color = '#666666');
+        leftLists.forEach(list => list.style.display = 'none');
+        rightParagraphs.forEach(paragraph => paragraph.style.display = '');
+        rightHeaders.forEach(header => header.style.color = '');
+        rightLists.forEach(list => list.style.display = '');
     }
 }
 
-// Function to apply toggle state on scroll to prevent reset
-function applyToggleState() {
+function applyResponsiveLayout() {
     const leftColumn = document.getElementById('left-column');
-    if (leftColumn.dataset.toggled === 'true') {
-        leftColumn.classList.add('expanded');
+    const toggleBtn = document.getElementById('toggle-btn');
+
+    if (window.innerWidth >= 850) {
+        resetToDesktopLayout();
+    } else {
+        const isExpanded = leftColumn.dataset.toggled === 'true';
+        applyColumnVisibility(isExpanded);
     }
 }
 
-// Event listeners
+function resetToDesktopLayout() {
+    const leftColumn = document.getElementById('left-column');
+    const rightColumn = document.querySelector('.right-column');
+    const toggleBtn = document.getElementById('toggle-btn');
+
+    leftColumn.classList.remove('expanded');
+    rightColumn.classList.remove('expanded');
+    leftColumn.dataset.toggled = 'false';
+
+    // Reset content visibility and color for both columns
+    leftColumn.querySelectorAll('p, ul, li').forEach(element => element.style.display = '');
+    leftColumn.querySelectorAll('h1, h2, h3').forEach(header => header.style.color = '');
+    rightColumn.querySelectorAll('p, ul, li').forEach(element => element.style.display = '');
+    rightColumn.querySelectorAll('h1, h2, h3').forEach(header => header.style.color = '');
+
+    // Reset toggle button arrow to the default (>)
+    toggleBtn.innerHTML = '&#8250;'; // Right arrow symbol
+}
+
+// Event listeners to apply layout on load and resize
 window.addEventListener('load', applyResponsiveLayout);
 window.addEventListener('resize', applyResponsiveLayout);
-window.addEventListener('scroll', applyToggleState);
 
 // Function to export the resume content to a PDF
 function exportToPDF() {

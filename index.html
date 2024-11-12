@@ -51,6 +51,23 @@
             overflow: hidden;
         }
 
+        @media (max-width: 850px) {
+            .container {
+                height: auto;
+                overflow: visible;
+                aspect-ratio: auto;
+            }
+            .toggle-btn {
+                display: block;
+            }
+        }
+
+        @media (min-width: 850px) {
+            .toggle-btn {
+                display: none;
+            }
+        }
+        
         /* ========================
            Mobile Toggle Button
            ======================== */
