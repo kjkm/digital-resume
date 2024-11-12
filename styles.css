@@ -50,13 +50,14 @@
     width: 30%;
     padding: clamp(10px, 2vw, 20px);
     box-sizing: border-box;
-    border-right: 1px solid #333;
+    border-right: 1px solid #4f446e;
     display: flex;
     flex-direction: column;
     border-radius: 8px;
     height: 100%;
     position: relative;
     transition: width 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .right-column {
@@ -86,6 +87,15 @@
 @media (max-width: 850px) {
     .toggle-btn {
         display: block; /* Show toggle button only on screens smaller than 850px */
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .toggle-btn:hover {
+        color: #8474bb;
+        background-color: #2e2e2e;
+        border-color: #4e446e;
+        transform: scale(1.0);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     }
 
     .container {
@@ -110,11 +120,6 @@
     }
 }
 
-@media (max-width: 850px) {
-    .toggle-btn {
-        display: block !important; /* Show toggle on mobile */
-    }
-}
 /* ========================
    Content Element Styling
    ======================== */
@@ -154,16 +159,25 @@ p, ul, li, .subtext {
 /* ========================
    Button Styling
    ======================== */
+#bottom-buttons {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#bottom-buttons:hover {
+    background-color: #4e446e;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
 
 #bottom-buttons svg {
     width: 24px;
     height: 24px;
     color: #a0a0a0;
 }
-#bottom-buttons:hover {
-    background-color: #555;
-}
 
+#bottom-buttons:hover svg {
+    color: #ffffff;
+}
 /* ========================
    Footer Styling
    ======================== */
