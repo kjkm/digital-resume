@@ -1,5 +1,9 @@
 // Toggle functionality for the left column on mobile
 function toggleLeftColumn() {
+    if(navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+
     const leftColumn = document.getElementById('left-column');
     const toggleBtn = document.getElementById('toggle-btn');
     const isExpanded = leftColumn.classList.contains('expanded');
