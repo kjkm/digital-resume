@@ -1,10 +1,12 @@
 // Adjust the container height based on content
 function adjustContainerHeight() {
     const container = document.getElementById('resume-container');
-    const contentHeight = container.scrollHeight;
-    if (window.innerWidth < 850 && contentHeight > container.clientHeight) {
-        container.style.height = `${contentHeight}px`;
-    } else if (window.innerWidth >= 850) {
+    if (window.innerWidth < 850) {
+        // For mobile, enforce the aspect ratio by setting height based on width
+        const width = container.clientWidth;
+        container.style.height = `${width * (11 / 8.5)}px`;
+    } else {
+        // Desktop view: enforce max height
         container.style.height = 'auto';
         container.style.maxHeight = '1100px';
     }

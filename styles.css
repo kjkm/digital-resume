@@ -35,9 +35,14 @@
     flex-grow: 1;
 }
 
+/* Desktop Enforced Aspect Ratio */
 .container {
+    width: 100%;
     max-width: 850px;
+    aspect-ratio: 8.5 / 11;
+    height: auto;
     max-height: 1100px;
+    overflow: hidden;
 }
 
 .left-column {
@@ -97,6 +102,14 @@
     .toggle-btn {
         display: block; /* Show toggle button only on screens smaller than 850px */
     }
+
+    /* Mobile Layout for Overflow */
+    .container {
+        max-height: none;
+        height: auto;
+        overflow-y: auto;
+        aspect-ratio: 8.5 / 11;
+    }
 }
 
 /* ========================
@@ -137,6 +150,7 @@ p, ul, li, .subtext {
 /* ========================
    Button Styling
    ======================== */
+
 #bottom-buttons svg {
     width: 24px;
     height: 24px;
@@ -167,24 +181,6 @@ footer p {
 /* ========================
    Media Queries
    ======================== */
-
-@media (max-width: 850px) {
-    .container {
-        max-height: none;
-    }
-    h2 {
-        font-size: clamp(0.8em, 1vw, 1.1em);
-    }
-    p {
-        font-size: clamp(0.6em, 1vw, 0.85em);
-    }
-    footer p {
-        font-size: clamp(0.5em, 0.7vw, 0.75em);
-    }
-    .subtext {
-        font-size: clamp(0.6em, 0.8vw, 0.9em);
-    }
-}
 
 @media (min-width: 850px) {
     .left-column {
