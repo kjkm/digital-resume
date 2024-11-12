@@ -127,8 +127,8 @@
     margin-bottom: 20px;
 }
 
-h1, h2, h3, p, ul, li {
-    color: #bbbbbb;
+h1, h2, h3{
+    color: #aaaaaa;
 }
 h1 {
     font-size: clamp(1em, 1.2vw + 0.4em, 1.2em);
@@ -136,7 +136,7 @@ h1 {
 }
 h2 {
     font-size: clamp(1em, 1.2vw + 0.4em, 1.0em);
-    color: #dddddd;
+    color: #cccccc;
 }
 h3 {
     font-size: clamp(0.8em, 1vw + 0.3em, 0.9em);
@@ -145,6 +145,7 @@ h3 {
 }
 p, ul, li, .subtext {
     font-size: clamp(0.75em, 1vw + 0.3em, 0.8em);
+    color: #909090;
 }
 .subtext {
     font-style: italic;
@@ -185,6 +186,7 @@ footer p {
    Media Queries
    ======================== */
 
+/* Desktop */
 @media (min-width: 850px) {
     .left-column {
         width: 30% !important;
