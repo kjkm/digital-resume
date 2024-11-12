@@ -40,14 +40,18 @@ function applyColumnVisibility(showLeftColumn) {
 }
 
 function applyResponsiveLayout() {
+    const container = document.getElementById('resume-container');
     const leftColumn = document.getElementById('left-column');
     const toggleBtn = document.getElementById('toggle-btn');
 
     if (window.innerWidth >= 850) {
         resetToDesktopLayout();
+        container.style.maxHeight = '1100px'; // Limit height on desktop
     } else {
+        container.style.maxHeight = 'none'; // Remove max-height on mobile
         const isExpanded = leftColumn.dataset.toggled === 'true';
         applyColumnVisibility(isExpanded);
+        toggleBtn.style.display = 'block';
     }
 }
 
