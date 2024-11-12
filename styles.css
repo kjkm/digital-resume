@@ -146,3 +146,25 @@
        .subtext { font-size: clamp(0.6em, 0.8vw, 0.9em); }
    }
    
+   /* Media query for larger screens */
+@media (min-width: 850px) {
+    .left-column {
+        width: 30% !important;
+    }
+    .right-column {
+        width: 70% !important;
+    }
+
+    /* Ignore the 'expanded' class on desktop */
+    .left-column.expanded {
+        width: 30% !important;
+    }
+    .left-column.expanded + .right-column {
+        width: 70% !important;
+    }
+
+    /* Ensure the toggle button is hidden */
+    .toggle-btn {
+        display: none !important;
+    }
+}
