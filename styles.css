@@ -1,0 +1,110 @@
+/* ========================
+   Scrollbar Styling
+   ======================== */
+*::-webkit-scrollbar { width: 12px; }
+*::-webkit-scrollbar-track { background: #1f1f1f; border-radius: 8px; }
+*::-webkit-scrollbar-thumb {
+    background-color: #4e4e4e;
+    border-radius: 8px;
+    border: 3px solid #1f1f1f;
+}
+*::-webkit-scrollbar-thumb:hover { background-color: #888; }
+* { scrollbar-width: thin; scrollbar-color: #4e4e4e #1f1f1f; }
+
+/* ========================
+   Content Styling
+   ======================== */
+.content {
+    display: flex;
+    width: 100%;
+    padding: clamp(10px, 2vw, 20px);
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+.left-column {
+    background-color: #2a2a2a;
+    width: 30%;
+    padding: clamp(10px, 2vw, 20px);
+    box-sizing: border-box;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    height: 100%;
+}
+.right-column {
+    width: 70%;
+    padding: clamp(10px, 2vw, 20px);
+    box-sizing: border-box;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* ========================
+   Element Styling
+   ======================== */
+.headshot {
+    width: clamp(50px, 8vw, 100px);
+    height: clamp(50px, 8vw, 100px);
+    background-color: #444;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+h1, h2, h3, p, ul, li { color: #bbbbbb; }
+h1 { font-size: clamp(1em, 1.2vw + 0.4em, 1.2em); color: #ffffff; }
+h2 { font-size: clamp(1em, 1.2vw + 0.4em, 1.0em); color: #dddddd; }
+h3 { font-size: clamp(0.8em, 1vw + 0.3em, 0.9em); font-weight: normal; font-style: italic; }
+p, ul, li, .subtext { font-size: clamp(0.75em, 1vw + 0.3em, 0.8em); }
+.subtext { font-style: italic; }
+
+/* ========================
+   Button Styling
+   ======================== */
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+#bottom-buttons {
+    background: #181818;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+#bottom-buttons svg {
+    width: 24px;
+    height: 24px;
+    color: #a0a0a0;
+}
+#bottom-buttons:hover { background-color: #555; }
+
+/* ========================
+   Footer Styling
+   ======================== */
+footer {
+    width: 100%;
+    background-color: #181818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: clamp(0.6em, 0.75vw, 0.875em);
+}
+footer p { color: #444; }
+
+/* ========================
+   Media Queries
+   ======================== */
+@media (max-width: 850px) {
+    .container { max-height: none; }
+    h2 { font-size: clamp(0.8em, 1vw, 1.1em); }
+    p { font-size: clamp(0.6em, 1vw, 0.85em); }
+    footer p { font-size: clamp(0.5em, 0.7vw, 0.75em); }
+    .subtext { font-size: clamp(0.6em, 0.8vw, 0.9em); }
+}
