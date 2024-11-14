@@ -1,226 +1,168 @@
-/* ========================
-   Global Styling
-   ======================== */
-
-   * {
-    scrollbar-width: thin;
-    scrollbar-color: #4e4e4e #1f1f1f;
+:root {
+    --color-debug: #ff0000;
+    --color-page-background: #1f1f1f; 
+    --color-menu-background: #181818;
+    --color-border: #2a2a2a;
+    --color-icon-unselected: #6b6b6b;
+    --color-icon-selected: #d7d7d7;
+    --color-text-linenumber: #6e7681;
+    --color-text-code: #cccccc;
+    --color-text-keyword: #286bcc;
+    --color-text-funcname: #dcdcaa;
+    --color-text-varname: #68cdfe;
+    --color-text-string: #ce916a;
+    --color-text-string-hover: #ecb38f;
+    --color-blockline: #404040;
+    --color-bracket-1: #ffc814;
 }
 
-*::-webkit-scrollbar {
-    width: 12px;
-}
-*::-webkit-scrollbar-track {
-    background: #1f1f1f;
-    border-radius: 8px;
-}
-*::-webkit-scrollbar-thumb {
-    background-color: #4e4e4e;
-    border-radius: 8px;
-    border: 3px solid #1f1f1f;
-}
-*::-webkit-scrollbar-thumb:hover {
-    background-color: #888;
-}
+body {
+    border: 1px solid var(--color-border);
 
-/* ========================
-   Layout and Containers
-   ======================== */
-
-.content {
-    display: flex;
-    width: 100%;
-    padding: clamp(10px, 2vw, 20px);
+    background-color: var(--color-page-background);
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
     box-sizing: border-box;
-    flex-grow: 1;
-}
 
-/* Desktop Enforced Aspect Ratio */
-.container {
-    width: 100%;
-    max-width: 850px;
-    aspect-ratio: 8.5 / 11;
-    height: auto;
-    max-height: 1100px;
-    overflow: hidden;
-}
-
-.left-column {
-    background-color: #2a2a2a;
-    width: 30%;
-    padding: clamp(10px, 2vw, 20px);
-    box-sizing: border-box;
-    border: 1px solid #685991;
     display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    height: 100%;
-    position: relative;
-    transition: width 0.3s ease;
-    box-shadow:
-            -5px 5px 12px rgba(0, 0, 0, 0.8),   /* Bottom-left shadow, darker */
-            5px -5px 12px rgba(52, 36, 56, 0.8); /* Top-right shadow, lighter */
-}
-
-.right-column {
-    width: 70%;
-    padding: clamp(10px, 2vw, 20px);
-    box-sizing: border-box;
-    color: #e0e0e0;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: width 0.3s ease;
-}
-
-/* Expanded state for left column */
-.left-column.expanded {
-    width: 70%;
-}
-
-.left-column.expanded + .right-column {
-    width: 30%;
-}
-
-/* ========================
-   Toggle Button Styling
-   ======================== */
-
-@media (max-width: 850px) {
-    .toggle-btn {
-        display: block; /* Show toggle button only on screens smaller than 850px */
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .toggle-btn:hover {
-        color: #8474bb;
-        background-color: #2e2e2e;
-        border-color: #4e446e;
-        transform: scale(1.0);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    .container {
-        display: inline-flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 100%;
-        height: auto; 
-        overflow: visible; 
-        aspect-ratio: auto; 
-    }
-
-    .content, .right-column, .left-column {
-        flex-grow: 1; 
-    }
-}
-
-/* Hide toggle button by default on larger screens */
-@media (min-width: 850px) {
-    .toggle-btn {
-        display: none !important; /* Force hidden on desktop */
-    }
-}
-
-/* ========================
-   Content Element Styling
-   ======================== */
-
-.headshot {
-    width: clamp(50px, 8vw, 100px);
-    height: clamp(50px, 8vw, 100px);
-    background-color: #444;
-    border-radius: 50%;
-    margin-bottom: 20px;
-}
-
-h1, h2, h3{
-    color: #aaaaaa;
-}
-h1 {
-    font-size: clamp(1em, 1.2vw + 0.4em, 1.2em);
-    color: #ffffff;
-}
-h2 {
-    font-size: clamp(1em, 1.2vw + 0.4em, 1.0em);
-    color: #cccccc;
-}
-h3 {
-    font-size: clamp(0.8em, 1vw + 0.3em, 0.9em);
-    font-weight: normal;
-    font-style: italic;
-}
-p, ul, li, .subtext {
-    font-size: clamp(0.75em, 1vw + 0.3em, 0.8em);
-    color: #909090;
-}
-.subtext {
-    font-style: italic;
-}
-
-/* ========================
-   Button Styling
-   ======================== */
-#bottom-buttons {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#bottom-buttons:hover {
-    background-color: #4e446e;
-    transform: scale(1.1);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-}
-
-#bottom-buttons svg {
-    width: 24px;
-    height: 24px;
-    color: #a0a0a0;
-}
-
-#bottom-buttons:hover svg {
-    color: #ffffff;
-}
-/* ========================
-   Footer Styling
-   ======================== */
-
-footer {
-    width: 100%;
-    background-color: #181818;
-    display: flex;
+    flex-direction:row;
+    
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    font-size: clamp(0.6em, 0.75vw, 0.875em);
 }
 
-footer p {
-    color: #444;
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: fl;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
-/* ========================
-   Media Queries
-   ======================== */
+header {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-menu-background);
+}
 
-/* Desktop */
-@media (min-width: 850px) {
-    .left-column {
-        width: 30% !important;
-    }
-    .right-column {
-        width: 70% !important;
-    }
+.sidebar {
+    width: 50px;
+    height: 100%;
 
-    /* Ensure 'expanded' class doesn't affect desktop layout */
-    .left-column.expanded {
-        width: 30% !important;
-    }
-    .left-column.expanded + .right-column {
-        width: 70% !important;
-    }
+    display: flex;
+    flex-direction: column;
 
-    /* Ensure the toggle button is hidden */
-    .toggle-btn {
-        display: none !important;
-    }
+}
+
+.sidebar .link-button {
+    background-color: transparent;
+    border: none;
+    padding: 12px;
+
+}
+
+.sidebar .link-button svg {
+    color: var(--color-icon-unselected);
+}
+
+.sidebar .link-button:hover svg {
+    color: var(--color-icon-selected)
+}
+
+.tabsbar {
+    width: 100%;
+    height: 40px;
+    background-color: var(--color-menu-background);
+}
+
+.doc {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-page-background);
+}
+
+.doc .linenums {
+    width: 50px;
+    height: 100%;
+    text-align: right;
+    padding-right: 10px;
+    color: var(--color-text-linenumber); 
+    font-family: Consolas, monospace;
+}
+
+.doc .code {
+    padding-left: 10px;
+    color: var(--color-text-code);
+    font-family: Consolas, monospace;
+}
+
+.doc .code .code-block {
+    border-left: 1px solid var(--color-blockline);
+    padding-left: 30px;
+
+}
+
+.code .keyword {
+    color: var(--color-icon-unselected);
+    transition: color 0.25s ease;
+    display: inline-block;
+}
+
+.code .keyword:hover {
+    color: var(--color-text-keyword);
+}
+
+.code .funcname {
+    color: var(--color-icon-unselected);
+    transition: color 0.25s ease;
+    display: inline-block;
+}
+
+.code .funcname:hover {
+    color: var(--color-text-funcname);
+}
+
+.code .bracket1 {
+    color: var(--color-icon-unselected);
+    transition: color 0.25s ease;
+    display: inline-block;
+}
+
+.code .bracket1:hover {
+    color: var(--color-bracket-1);
+}
+
+.code .varname {
+    color: var(--color-icon-unselected);
+    transition: color 0.25s ease;
+    display: inline-block;
+}
+
+.code .varname:hover {
+    color: var(--color-text-varname);
+}
+
+.code .operator {
+    color: var(--color-icon-unselected);
+    transition: color 0.25s ease;
+    display: inline-block;
+}
+
+.code .operator:hover {
+    color: var(--color-text-code);
+}
+
+.code .string {
+    color: var(--color-text-string);
+    transition: color 0.2s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.code .string:hover {
+    color: var(--color-text-string-hover);
+    transform: scale(1.2);
+    background-color: rgba(129, 90, 65, 0.4);
 }
